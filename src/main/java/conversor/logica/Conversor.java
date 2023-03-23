@@ -1,6 +1,7 @@
 package conversor.logica;
 
 import java.awt.HeadlessException;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class Conversor {
@@ -14,13 +15,22 @@ public class Conversor {
 		
 	}	
 	
-	public double setInput(String cantidad) {
-            try {
-                return Input = Double.parseDouble(JOptionPane.showInputDialog(null, (String) cantidad));
-            }catch(HeadlessException | NumberFormatException e) {
-                return Input = Double.parseDouble(JOptionPane.showInputDialog(null, "La cantidad ingresa no es válida favor de ingresar un número."));
+        public double setInput(String cantidad) {
+            Scanner sc = new Scanner(System.in);
+            double input = 0;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    input = Double.parseDouble(JOptionPane.showInputDialog(null, (String) cantidad));
+                    validInput = true;
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "La cantidad ingresada no es válida, por favor ingrese un número.");
+                } catch (HeadlessException e) {
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error.");
+                }
             }
-	}
+            return input;
+        }
 
 	public void setMensaje(String mensaje) {
             JOptionPane.showMessageDialog(null,(String) mensaje);
